@@ -14,4 +14,7 @@ City.destroy_all
 5.times { City.create(city_name: Faker::Address.city) }
 
 5.times { DogSitter.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, city_id: City.all.sample.id) }
-5.times { Dog.create(name: Faker::Creature::Dog.name, city_id: City.all.sample.id) }
+10.times do
+	dog = Dog.create(name: Faker::Creature::Dog.name, city_id: City.all.sample.id)
+	Stroll.create(date: Faker::Time.forward(days: 60), dog: dog)
+end
